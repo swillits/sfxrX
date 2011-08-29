@@ -7,7 +7,7 @@
 //
 
 #import "SFXDocument.h"
-#import "AudioController.h"
+#import "SFXAudioPlayer.h"
 #import "SFXEffect.h"
 #import "WaveformView.h"
 
@@ -36,7 +36,13 @@
 	
 	
 	self.volume = 10.0;
-	self.soundEffect = [SFXEffect soundEffect];
+	
+	
+	if (!self.soundEffect) {
+		self.soundEffect = [SFXEffect soundEffect];
+	} else {
+		[waveformView setEffect:self.soundEffect];
+	}
 }
 
 
@@ -148,7 +154,7 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 {
 	SFXEffect * effect = (SFXEffect *)[[rememberedController selectedObjects] lastObject];
-	if (effect) [[AudioController sharedInstance] playSFXEffect:effect];
+	if (effect) [[SFXAudioPlayer sharedInstance] playSoundEffect:effect];
 	[[rememberSegmentedControl cell] setEnabled:(effect != nil) forSegment:1];
 }
 
@@ -180,7 +186,7 @@
 
 - (IBAction)play:(id)sender;
 {
-	[[AudioController sharedInstance] playSFXEffect:self.soundEffect];
+	[[SFXAudioPlayer sharedInstance] playSoundEffect:self.soundEffect];
 }
 
 

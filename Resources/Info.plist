@@ -11,12 +11,16 @@
 			<array>
 				<string>sfs</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Document</string>
 			<key>CFBundleTypeName</key>
 			<string>sfxr Sound Effect</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>NSDocumentClass</key>
+			<string>SFXDocument</string>
 			<key>NSPersistentStoreTypeKey</key>
 			<string>XML</string>
 		</dict>
@@ -36,14 +40,14 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>30</string>
+	<string>83</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.5</string>
+	<string>10.6</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://www.sethwillits.com/temp/sfxr/sfxrX.xml</string>
+	<string>http://www.sethwillits.com/sfxrX/sfxrX.xml</string>
 </dict>
 </plist>

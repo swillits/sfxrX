@@ -13,9 +13,9 @@
 @class SFXSampleBuffer;
 
 
-@interface AudioController : NSObject {
+@interface SFXAudioPlayer : NSObject {
 	PaStream * stream;
-	BOOL mMute;
+	BOOL mMuted;
 	
 	SFXSynthesizer * mSynthesizer;
 	
@@ -23,10 +23,10 @@
 	NSUInteger mNumSamplesPlayed;
 }
 
-@property (readwrite) BOOL mute;
+@property (readwrite) BOOL muted;
 
-+ (AudioController *)sharedInstance;
-- (void)playSFXEffect:(SFXEffect *)aSFXEffect;
++ (SFXAudioPlayer *)sharedInstance;
+- (void)playSoundEffect:(SFXEffect *)effect;
 - (void)stop;
 
 @end

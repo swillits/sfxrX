@@ -11,9 +11,30 @@
 		5D56BF310DC05795006EF276 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D56BF300DC05795006EF276 /* CoreAudio.framework */; };
 		5D56BF3B0DC057AA006EF276 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D56BF390DC057AA006EF276 /* AudioToolbox.framework */; };
 		5D56BF3C0DC057AA006EF276 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D56BF3A0DC057AA006EF276 /* AudioUnit.framework */; };
+		5D5C33FC140B303300093C14 /* WaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C33FB140B303300093C14 /* WaveformView.m */; };
+		5D5C3439140B339000093C14 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5D5C33F2140B301600093C14 /* Sparkle.framework */; };
+		5D5C343A140B339400093C14 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D5C33F2140B301600093C14 /* Sparkle.framework */; };
+		5D5C3447140B352100093C14 /* SFXSynthesizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C3446140B352100093C14 /* SFXSynthesizer.m */; };
+		5D5C35A7140B4D9000093C14 /* Pause.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35A1140B4D9000093C14 /* Pause.icns */; };
+		5D5C35A8140B4D9000093C14 /* Play.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35A2140B4D9000093C14 /* Play.icns */; };
+		5D5C35A9140B4D9000093C14 /* Remember.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35A3140B4D9000093C14 /* Remember.icns */; };
+		5D5C35AA140B4D9000093C14 /* Save.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35A4140B4D9000093C14 /* Save.icns */; };
+		5D5C35AB140B4D9000093C14 /* Stop.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35A5140B4D9000093C14 /* Stop.icns */; };
+		5D5C35AE140B4DD100093C14 /* Export.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35AD140B4DD100093C14 /* Export.icns */; };
+		5D5C35B4140B4E5B00093C14 /* Mutate.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35B2140B4E5B00093C14 /* Mutate.icns */; };
+		5D5C35B5140B4E5B00093C14 /* Randomize.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35B3140B4E5B00093C14 /* Randomize.icns */; };
+		5D5C35B7140B4EDD00093C14 /* Open.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35B6140B4EDD00093C14 /* Open.icns */; };
+		5D5C35C3140B4F7600093C14 /* Temporary.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35C2140B4F7600093C14 /* Temporary.icns */; };
+		5D5C35EB140B530C00093C14 /* SFXDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C35E9140B530C00093C14 /* SFXDocument.xib */; };
+		5D5C35F1140B532200093C14 /* SFXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C35F0140B532200093C14 /* SFXDocument.m */; };
+		5D5C365C140B58A700093C14 /* AGBinaryDataStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C3657140B58A700093C14 /* AGBinaryDataStream.m */; };
+		5D5C365D140B58A700093C14 /* AGBinaryFileStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C3659140B58A700093C14 /* AGBinaryFileStream.m */; };
+		5D5C365E140B58A700093C14 /* AGBinaryStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C365B140B58A700093C14 /* AGBinaryStream.m */; };
+		5D5C379A140C07A600093C14 /* Document.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5D5C3799140C07A600093C14 /* Document.icns */; };
+		5D5C37F7140C0E2D00093C14 /* SFXSampleBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C37F6140C0E2D00093C14 /* SFXSampleBuffer.m */; };
 		5DE75A980DC30644000FD274 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE75A800DC30644000FD274 /* main.m */; };
-		5DE75A990DC30644000FD274 /* SoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE75A810DC30644000FD274 /* SoundEffect.m */; };
-		5DE75A9A0DC30644000FD274 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE75A820DC30644000FD274 /* AudioController.m */; };
+		5DE75A990DC30644000FD274 /* SFXEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE75A810DC30644000FD274 /* SFXEffect.m */; };
+		5DE75A9A0DC30644000FD274 /* SFXAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE75A820DC30644000FD274 /* SFXAudioPlayer.m */; };
 		5DE75A9B0DC30644000FD274 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE75A860DC30644000FD274 /* Controller.m */; };
 		5DE75A9C0DC30644000FD274 /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE75A940DC30644000FD274 /* libportaudio.a */; };
 		5DE75A9D0DC30644000FD274 /* SCToolStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DE75A960DC30644000FD274 /* SCToolStripView.m */; };
@@ -29,19 +50,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5DCFE28513CBCE8F00A6EFD3 /* PBXContainerItemProxy */ = {
+		5D5C33F1140B301600093C14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D9AE6DA13C54A1100484A7F /* Sparkle.framework */;
+			remoteInfo = Sparkle;
+		};
+		5D5C33F3140B301600093C14 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5D9AE79C13C54BA100484A7F /* relaunch */;
 			remoteInfo = relaunch;
-		};
-		5DF378F010CB4065005AC236 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = Sparkle;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -52,6 +73,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5D5C3439140B339000093C14 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,16 +88,41 @@
 		5D56BF300DC05795006EF276 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		5D56BF390DC057AA006EF276 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		5D56BF3A0DC057AA006EF276 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = /System/Library/Frameworks/AudioUnit.framework; sourceTree = "<absolute>"; };
-		5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = ../../../Subversion/Sparkle/Sparkle.xcodeproj; sourceTree = SOURCE_ROOT; };
+		5D5C33FA140B303300093C14 /* WaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveformView.h; path = Source/WaveformView.h; sourceTree = "<group>"; };
+		5D5C33FB140B303300093C14 /* WaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveformView.m; path = Source/WaveformView.m; sourceTree = "<group>"; };
+		5D5C3445140B352100093C14 /* SFXSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFXSynthesizer.h; path = Source/SFXSynthesizer.h; sourceTree = "<group>"; };
+		5D5C3446140B352100093C14 /* SFXSynthesizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFXSynthesizer.m; path = Source/SFXSynthesizer.m; sourceTree = "<group>"; };
+		5D5C35A1140B4D9000093C14 /* Pause.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Pause.icns; sourceTree = "<group>"; };
+		5D5C35A2140B4D9000093C14 /* Play.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Play.icns; sourceTree = "<group>"; };
+		5D5C35A3140B4D9000093C14 /* Remember.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Remember.icns; sourceTree = "<group>"; };
+		5D5C35A4140B4D9000093C14 /* Save.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Save.icns; sourceTree = "<group>"; };
+		5D5C35A5140B4D9000093C14 /* Stop.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stop.icns; sourceTree = "<group>"; };
+		5D5C35AD140B4DD100093C14 /* Export.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Export.icns; sourceTree = "<group>"; };
+		5D5C35B2140B4E5B00093C14 /* Mutate.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Mutate.icns; sourceTree = "<group>"; };
+		5D5C35B3140B4E5B00093C14 /* Randomize.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Randomize.icns; sourceTree = "<group>"; };
+		5D5C35B6140B4EDD00093C14 /* Open.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Open.icns; sourceTree = "<group>"; };
+		5D5C35C2140B4F7600093C14 /* Temporary.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Temporary.icns; sourceTree = "<group>"; };
+		5D5C35EA140B530C00093C14 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Resources/English.lproj/SFXDocument.xib; sourceTree = "<group>"; };
+		5D5C35EF140B532200093C14 /* SFXDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFXDocument.h; path = Source/SFXDocument.h; sourceTree = "<group>"; };
+		5D5C35F0140B532200093C14 /* SFXDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFXDocument.m; path = Source/SFXDocument.m; sourceTree = "<group>"; };
+		5D5C3656140B58A700093C14 /* AGBinaryDataStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGBinaryDataStream.h; path = Source/AGBinaryDataStream.h; sourceTree = "<group>"; };
+		5D5C3657140B58A700093C14 /* AGBinaryDataStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGBinaryDataStream.m; path = Source/AGBinaryDataStream.m; sourceTree = "<group>"; };
+		5D5C3658140B58A700093C14 /* AGBinaryFileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGBinaryFileStream.h; path = Source/AGBinaryFileStream.h; sourceTree = "<group>"; };
+		5D5C3659140B58A700093C14 /* AGBinaryFileStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGBinaryFileStream.m; path = Source/AGBinaryFileStream.m; sourceTree = "<group>"; };
+		5D5C365A140B58A700093C14 /* AGBinaryStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGBinaryStream.h; path = Source/AGBinaryStream.h; sourceTree = "<group>"; };
+		5D5C365B140B58A700093C14 /* AGBinaryStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGBinaryStream.m; path = Source/AGBinaryStream.m; sourceTree = "<group>"; };
+		5D5C3799140C07A600093C14 /* Document.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Document.icns; sourceTree = "<group>"; };
+		5D5C37F5140C0E2D00093C14 /* SFXSampleBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFXSampleBuffer.h; path = Source/SFXSampleBuffer.h; sourceTree = "<group>"; };
+		5D5C37F6140C0E2D00093C14 /* SFXSampleBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFXSampleBuffer.m; path = Source/SFXSampleBuffer.m; sourceTree = "<group>"; };
+		5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = ../Sparkle/Sparkle.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5DE75A800DC30644000FD274 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
-		5DE75A810DC30644000FD274 /* SoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundEffect.m; path = Source/SoundEffect.m; sourceTree = "<group>"; };
-		5DE75A820DC30644000FD274 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioController.m; path = Source/AudioController.m; sourceTree = "<group>"; };
-		5DE75A830DC30644000FD274 /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundEffect.h; path = Source/SoundEffect.h; sourceTree = "<group>"; };
+		5DE75A810DC30644000FD274 /* SFXEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFXEffect.m; path = Source/SFXEffect.m; sourceTree = "<group>"; };
+		5DE75A820DC30644000FD274 /* SFXAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFXAudioPlayer.m; path = Source/SFXAudioPlayer.m; sourceTree = "<group>"; };
+		5DE75A830DC30644000FD274 /* SFXEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFXEffect.h; path = Source/SFXEffect.h; sourceTree = "<group>"; };
 		5DE75A840DC30644000FD274 /* sfxrX_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sfxrX_Prefix.pch; path = Source/sfxrX_Prefix.pch; sourceTree = "<group>"; };
-		5DE75A850DC30644000FD274 /* endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = endian.h; path = Source/endian.h; sourceTree = "<group>"; };
 		5DE75A860DC30644000FD274 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Controller.m; path = Source/Controller.m; sourceTree = "<group>"; };
 		5DE75A870DC30644000FD274 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = Source/Controller.h; sourceTree = "<group>"; };
-		5DE75A880DC30644000FD274 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioController.h; path = Source/AudioController.h; sourceTree = "<group>"; };
+		5DE75A880DC30644000FD274 /* SFXAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFXAudioPlayer.h; path = Source/SFXAudioPlayer.h; sourceTree = "<group>"; };
 		5DE75A8B0DC30644000FD274 /* pa_asio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pa_asio.h; sourceTree = "<group>"; };
 		5DE75A8C0DC30644000FD274 /* pa_jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pa_jack.h; sourceTree = "<group>"; };
 		5DE75A8D0DC30644000FD274 /* pa_linux_alsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pa_linux_alsa.h; sourceTree = "<group>"; };
@@ -85,7 +132,6 @@
 		5DE75A910DC30644000FD274 /* pa_win_wmme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pa_win_wmme.h; sourceTree = "<group>"; };
 		5DE75A920DC30644000FD274 /* portaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = portaudio.h; sourceTree = "<group>"; };
 		5DE75A940DC30644000FD274 /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libportaudio.a; sourceTree = "<group>"; };
-		5DE75A950DC30644000FD274 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = misc.h; path = Source/misc.h; sourceTree = "<group>"; };
 		5DE75A960DC30644000FD274 /* SCToolStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCToolStripView.m; path = Source/SCToolStripView.m; sourceTree = "<group>"; };
 		5DE75A970DC30644000FD274 /* SCToolStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCToolStripView.h; path = Source/SCToolStripView.h; sourceTree = "<group>"; };
 		5DE75AAC0DC30689000FD274 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -105,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D5C343A140B339400093C14 /* Sparkle.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				5D56BF310DC05795006EF276 /* CoreAudio.framework in Frameworks */,
 				5D56BF3B0DC057AA006EF276 /* AudioToolbox.framework in Frameworks */,
@@ -149,12 +196,9 @@
 			isa = PBXGroup;
 			children = (
 				5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */,
-				5DE75A840DC30644000FD274 /* sfxrX_Prefix.pch */,
-				5DE75A950DC30644000FD274 /* misc.h */,
-				5DE75A850DC30644000FD274 /* endian.h */,
-				5DE75A800DC30644000FD274 /* main.m */,
 				5DE75A9F0DC3064B000FD274 /* Code */,
-				5DE75A890DC30644000FD274 /* portaudio */,
+				5D5C3880140C170E00093C14 /* Document */,
+				5D5C3881140C172700093C14 /* Misc */,
 				5DE75AAA0DC30689000FD274 /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -169,6 +213,52 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5D5C33ED140B301600093C14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D5C33F2140B301600093C14 /* Sparkle.framework */,
+				5D5C33F4140B301600093C14 /* relaunch */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5D5C365F140B58AA00093C14 /* AGBinaryStream */ = {
+			isa = PBXGroup;
+			children = (
+				5D5C3656140B58A700093C14 /* AGBinaryDataStream.h */,
+				5D5C3657140B58A700093C14 /* AGBinaryDataStream.m */,
+				5D5C3658140B58A700093C14 /* AGBinaryFileStream.h */,
+				5D5C3659140B58A700093C14 /* AGBinaryFileStream.m */,
+				5D5C365A140B58A700093C14 /* AGBinaryStream.h */,
+				5D5C365B140B58A700093C14 /* AGBinaryStream.m */,
+			);
+			name = AGBinaryStream;
+			sourceTree = "<group>";
+		};
+		5D5C3880140C170E00093C14 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				5D5C35EF140B532200093C14 /* SFXDocument.h */,
+				5D5C35F0140B532200093C14 /* SFXDocument.m */,
+				5D5C33FA140B303300093C14 /* WaveformView.h */,
+				5D5C33FB140B303300093C14 /* WaveformView.m */,
+			);
+			name = Document;
+			sourceTree = "<group>";
+		};
+		5D5C3881140C172700093C14 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				5DE75A840DC30644000FD274 /* sfxrX_Prefix.pch */,
+				5DE75A800DC30644000FD274 /* main.m */,
+				5DE75A970DC30644000FD274 /* SCToolStripView.h */,
+				5DE75A960DC30644000FD274 /* SCToolStripView.m */,
+				5D5C365F140B58AA00093C14 /* AGBinaryStream */,
+				5DE75A890DC30644000FD274 /* portaudio */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		5DE75A890DC30644000FD274 /* portaudio */ = {
@@ -209,12 +299,14 @@
 			children = (
 				5DE75A870DC30644000FD274 /* Controller.h */,
 				5DE75A860DC30644000FD274 /* Controller.m */,
-				5DE75A880DC30644000FD274 /* AudioController.h */,
-				5DE75A820DC30644000FD274 /* AudioController.m */,
-				5DE75A830DC30644000FD274 /* SoundEffect.h */,
-				5DE75A810DC30644000FD274 /* SoundEffect.m */,
-				5DE75A970DC30644000FD274 /* SCToolStripView.h */,
-				5DE75A960DC30644000FD274 /* SCToolStripView.m */,
+				5DE75A880DC30644000FD274 /* SFXAudioPlayer.h */,
+				5DE75A820DC30644000FD274 /* SFXAudioPlayer.m */,
+				5D5C3445140B352100093C14 /* SFXSynthesizer.h */,
+				5D5C3446140B352100093C14 /* SFXSynthesizer.m */,
+				5DE75A830DC30644000FD274 /* SFXEffect.h */,
+				5DE75A810DC30644000FD274 /* SFXEffect.m */,
+				5D5C37F5140C0E2D00093C14 /* SFXSampleBuffer.h */,
+				5D5C37F6140C0E2D00093C14 /* SFXSampleBuffer.m */,
 			);
 			name = Code;
 			sourceTree = "<group>";
@@ -226,6 +318,7 @@
 				5DE75AAD0DC30689000FD274 /* InfoPlist.strings */,
 				5DE75AB80DC30689000FD274 /* Info.plist */,
 				5D48F5E20DC44521002B1C65 /* MainMenu.xib */,
+				5D5C35E9140B530C00093C14 /* SFXDocument.xib */,
 				5DE75AAB0DC30689000FD274 /* Credits.rtf */,
 			);
 			path = Resources;
@@ -234,6 +327,17 @@
 		5DE75AB10DC30689000FD274 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5D5C3799140C07A600093C14 /* Document.icns */,
+				5D5C35C2140B4F7600093C14 /* Temporary.icns */,
+				5D5C35B6140B4EDD00093C14 /* Open.icns */,
+				5D5C35B2140B4E5B00093C14 /* Mutate.icns */,
+				5D5C35B3140B4E5B00093C14 /* Randomize.icns */,
+				5D5C35AD140B4DD100093C14 /* Export.icns */,
+				5D5C35A1140B4D9000093C14 /* Pause.icns */,
+				5D5C35A2140B4D9000093C14 /* Play.icns */,
+				5D5C35A3140B4D9000093C14 /* Remember.icns */,
+				5D5C35A4140B4D9000093C14 /* Save.icns */,
+				5D5C35A5140B4D9000093C14 /* Stop.icns */,
 				5DE75AB20DC30689000FD274 /* BackAdorn.png */,
 				5DE75AB30DC30689000FD274 /* cntrl_btnAddToFavorites.png */,
 				5DE75AB40DC30689000FD274 /* ForwardAdorn.png */,
@@ -242,15 +346,6 @@
 				5DE75AB70DC30689000FD274 /* remove.tiff */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		5DF378EC10CB4065005AC236 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5DF378F110CB4065005AC236 /* Sparkle.framework */,
-				5DCFE28613CBCE8F00A6EFD3 /* relaunch */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,7 +390,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5DF378EC10CB4065005AC236 /* Products */;
+					ProductGroup = 5D5C33ED140B301600093C14 /* Products */;
 					ProjectRef = 5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */;
 				},
 			);
@@ -307,18 +402,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5DCFE28613CBCE8F00A6EFD3 /* relaunch */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = relaunch;
-			remoteRef = 5DCFE28513CBCE8F00A6EFD3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5DF378F110CB4065005AC236 /* Sparkle.framework */ = {
+		5D5C33F2140B301600093C14 /* Sparkle.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Sparkle.framework;
-			remoteRef = 5DF378F010CB4065005AC236 /* PBXContainerItemProxy */;
+			remoteRef = 5D5C33F1140B301600093C14 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5D5C33F4140B301600093C14 /* relaunch */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = relaunch;
+			remoteRef = 5D5C33F3140B301600093C14 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -337,6 +432,18 @@
 				5DE75AC00DC30689000FD274 /* plus.tiff in Resources */,
 				5DE75AC10DC30689000FD274 /* remove.tiff in Resources */,
 				5D48F5E40DC44521002B1C65 /* MainMenu.xib in Resources */,
+				5D5C35A7140B4D9000093C14 /* Pause.icns in Resources */,
+				5D5C35A8140B4D9000093C14 /* Play.icns in Resources */,
+				5D5C35A9140B4D9000093C14 /* Remember.icns in Resources */,
+				5D5C35AA140B4D9000093C14 /* Save.icns in Resources */,
+				5D5C35AB140B4D9000093C14 /* Stop.icns in Resources */,
+				5D5C35AE140B4DD100093C14 /* Export.icns in Resources */,
+				5D5C35B4140B4E5B00093C14 /* Mutate.icns in Resources */,
+				5D5C35B5140B4E5B00093C14 /* Randomize.icns in Resources */,
+				5D5C35B7140B4EDD00093C14 /* Open.icns in Resources */,
+				5D5C35C3140B4F7600093C14 /* Temporary.icns in Resources */,
+				5D5C35EB140B530C00093C14 /* SFXDocument.xib in Resources */,
+				5D5C379A140C07A600093C14 /* Document.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,10 +471,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DE75A980DC30644000FD274 /* main.m in Sources */,
-				5DE75A990DC30644000FD274 /* SoundEffect.m in Sources */,
-				5DE75A9A0DC30644000FD274 /* AudioController.m in Sources */,
+				5DE75A990DC30644000FD274 /* SFXEffect.m in Sources */,
+				5DE75A9A0DC30644000FD274 /* SFXAudioPlayer.m in Sources */,
 				5DE75A9B0DC30644000FD274 /* Controller.m in Sources */,
 				5DE75A9D0DC30644000FD274 /* SCToolStripView.m in Sources */,
+				5D5C33FC140B303300093C14 /* WaveformView.m in Sources */,
+				5D5C3447140B352100093C14 /* SFXSynthesizer.m in Sources */,
+				5D5C35F1140B532200093C14 /* SFXDocument.m in Sources */,
+				5D5C365C140B58A700093C14 /* AGBinaryDataStream.m in Sources */,
+				5D5C365D140B58A700093C14 /* AGBinaryFileStream.m in Sources */,
+				5D5C365E140B58A700093C14 /* AGBinaryStream.m in Sources */,
+				5D5C37F7140C0E2D00093C14 /* SFXSampleBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +494,15 @@
 				5D48F5E30DC44521002B1C65 /* English */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		5D5C35E9140B530C00093C14 /* SFXDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D5C35EA140B530C00093C14 /* English */,
+			);
+			name = SFXDocument.xib;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		5DE75AAB0DC30689000FD274 /* Credits.rtf */ = {
@@ -431,7 +554,6 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../build/Release\"",
@@ -454,10 +576,15 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Debug;
 		};
@@ -465,13 +592,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					ppc,
 					i386,
+					x86_64,
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Release;
 		};

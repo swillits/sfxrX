@@ -6,7 +6,7 @@
 //  Copyright 2008 Araelium Group. All rights reserved.
 //
 
-#import "AudioController.h"
+#import "SFXAudioPlayer.h"
 #import "SFXEffect.h"
 #import "SFXSampleBuffer.h"
 #import "SFXSynthesizer.h"
@@ -20,22 +20,22 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
     void * userData );
 
 
-@interface AudioController ()
+@interface SFXAudioPlayer ()
 - (void)audioCallbackOutputBuffer:(void *)outputBuffer frameCount:(unsigned long)frameCount;
 @end
 
 
 
 
-@implementation AudioController
-@synthesize mute = mMute;
+@implementation SFXAudioPlayer
+@synthesize muted = mMuted;
 
 
-+ (AudioController *)sharedInstance;
++ (SFXAudioPlayer *)sharedInstance;
 {
-	static AudioController * sharedInstance = nil;
+	static SFXAudioPlayer * sharedInstance = nil;
 	if (!sharedInstance) {
-		sharedInstance = [[AudioController alloc] init];
+		sharedInstance = [[SFXAudioPlayer alloc] init];
 	}
 	return sharedInstance;
 }
@@ -80,7 +80,7 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 
 
 
-- (void)playSFXEffect:(SFXEffect *)effect;
+- (void)playSoundEffect:(SFXEffect *)effect;
 {
 	@synchronized(self) {
 		[mSampleBuffer release];
@@ -120,7 +120,7 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 	}
 	
 	// Add the sound
-	[(AudioController *)userData audioCallbackOutputBuffer:outputBuffer frameCount:frameCount];
+	[(SFXAudioPlayer *)userData audioCallbackOutputBuffer:outputBuffer frameCount:frameCount];
 	
 	return 0;
 }
@@ -130,7 +130,7 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 - (void)audioCallbackOutputBuffer:(void *)outputBuffer frameCount:(unsigned long)frameCount;
 {
 	@synchronized(self) {
-		if (mSampleBuffer && !mMute) {
+		if (mSampleBuffer && !mMuted) {
 			NSUInteger numUnplayedSamples = mSampleBuffer.numberOfSamples - mNumSamplesPlayed;
 			NSUInteger numFramesToCopy = MIN(frameCount, numUnplayedSamples);
 			
