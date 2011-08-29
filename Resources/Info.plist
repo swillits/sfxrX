@@ -40,7 +40,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>86</string>
+	<string>85</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.6</string>
 	<key>NSMainNibFile</key>
@@ -48,6 +48,6 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://www.sethwillits.com/sfxrX/sfxrX.xml</string>
+	<string>https://store.araelium.com/updates/sfxrX</string>
 </dict>
 </plist>
