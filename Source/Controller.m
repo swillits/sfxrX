@@ -10,19 +10,11 @@
 #import "Controller.h"
 #import "SoundEffect.h"
 #import "portaudio.h"
+#import "WaveformView.h"
 
 
 
 @implementation Controller
-
-+ (void)initialize;
-{
-	NSMutableDictionary * defaults = [NSMutableDictionary dictionary];
-	
-	//[defaults setObject:[NSNumber numberWithBool:YES] forKey:SUEnableSystemProfilingKey];
-	
-	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
-}
 
 - (void)awakeFromNib;
 {
@@ -36,13 +28,10 @@
 	
 	[playButton setKeyEquivalent:@" "];
 	
-	[[self window] setContentBorderThickness:40 forEdge:NSMinYEdge];
 	[[self window] center];
 	[[self window] makeKeyAndOrderFront:nil];
 	
-	[self willChangeValueForKey:@"currentSoundEffect"];
-		currentSoundEffect = [[SoundEffect soundEffect] retain];
-	[self didChangeValueForKey:@"currentSoundEffect"];
+	[self setCurrentSoundEffect:[SoundEffect soundEffect]];
 }
 
 
@@ -98,6 +87,8 @@
 		currentSoundEffect = [effect retain];
 	[self didChangeValueForKey:@"currentSoundEffect"];
 	
+	
+	[waveformView setEffect:effect];
 	
 	[self play:nil];
 }

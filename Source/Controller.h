@@ -7,16 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-
-
+@class WaveformView;
 @class SoundEffect;
+
+
 @interface Controller : NSWindowController {
 	IBOutlet NSWindow * preferencesWindow;
 	IBOutlet NSArrayController * rememberedController;
 	IBOutlet NSSegmentedControl * rememberSegmentedControl;
 	IBOutlet NSButton * playButton;
 	IBOutlet NSTableView * rememberedSoundsTable;
+	IBOutlet NSDrawer * drawer;
+	IBOutlet WaveformView * waveformView;
 	
 	NSMutableArray * rememberedSoundEffects;
 	SoundEffect * currentSoundEffect;

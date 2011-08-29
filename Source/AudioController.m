@@ -9,7 +9,7 @@
 #import "AudioController.h"
 #import "SoundEffect.h"
 #import "misc.h"
-
+#import "endian.h"
 
 
 int AudioCallback(const void *inputBuffer, void *outputBuffer,
@@ -20,52 +20,49 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 
 
 
-float master_vol = 0.05;
+static float master_vol = 0.05;
 
-int phase;
-double fperiod;
-double fmaxperiod;
-double fslide;
-double fdslide;
-int period;
-float square_duty;
-float square_slide;
-int env_stage;
-int env_time;
-int env_length[3];
-float env_vol;
-float fphase;
-float fdphase;
-int iphase;
-float phaser_buffer[1024];
-int ipp;
-float noise_buffer[32];
-float fltp;
-float fltdp;
-float fltw;
-float fltw_d;
-float fltdmp;
-float fltphp;
-float flthp;
-float flthp_d;
-float vib_phase;
-float vib_speed;
-float vib_amp;
-int rep_time;
-int rep_limit;
-int arp_time;
-int arp_limit;
-double arp_mod;
+static int phase;
+static double fperiod;
+static double fmaxperiod;
+static double fslide;
+static double fdslide;
+static int period;
+static float square_duty;
+static float square_slide;
+static int env_stage;
+static int env_time;
+static int env_length[3];
+static float env_vol;
+static float fphase;
+static float fdphase;
+static int iphase;
+static float phaser_buffer[1024];
+static int ipp;
+static float noise_buffer[32];
+static float fltp;
+static float fltdp;
+static float fltw;
+static float fltw_d;
+static float fltdmp;
+static float fltphp;
+static float flthp;
+static float flthp_d;
+static float vib_phase;
+static float vib_speed;
+static float vib_amp;
+static int rep_time;
+static int rep_limit;
+static int arp_time;
+static int arp_limit;
+static double arp_mod;
 
-float* vselected=NULL;
-int vcurbutton=-1;
+static int wav_bits=16;
+static int wav_freq=44100;
 
-int wav_bits=16;
-int wav_freq=44100;
-
-int file_sampleswritten;
-float filesample=0.0f;
-int fileacc=0;
+static int file_sampleswritten;
+static float filesample=0.0f;
+static int fileacc=0;
 
 
 

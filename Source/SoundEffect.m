@@ -48,6 +48,15 @@ NSString * SfxFileTypeDocument = @"sfs";
 @synthesize arp_mod			= mArp_mod;
 
 
++ (NSSet *)keyPathsForWaveform;
+{
+	return [NSSet setWithObjects:@"wave_type", @"sound_vol", @"base_freq", @"freq_limit", @"freq_ramp", @"freq_dramp", @"duty", @"duty_ramp",
+				@"vib_strength", @"vib_speed", @"vib_delay", @"env_attack", @"env_sustain", @"env_decay", @"env_punch", @"filter_on",
+				@"lpf_resonance", @"lpf_freq", @"lpf_ramp", @"hpf_freq", @"hpf_ramp", @"pha_offset", @"pha_ramp", @"repeat_speed", @"arp_speed", @"arp_mod", nil];
+}
+
+
+
 + (id)soundEffect;
 {
 	return [[[[self class] alloc] init] autorelease];

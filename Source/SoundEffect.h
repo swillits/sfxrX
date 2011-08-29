@@ -66,6 +66,9 @@ enum {
 	float mArp_mod;			// Change Amount
 }
 
+
++ (NSSet *)keyPathsForWaveform;
+
 + (id)soundEffect;
 + (id)soundEffectFromPreset:(int)preset;
 + (id)soundEffectWithURL:(NSURL *)url;
