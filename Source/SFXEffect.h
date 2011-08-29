@@ -80,7 +80,7 @@ enum {
 - (void)reset;
 - (void)resetFromPreset:(int)preset;
 
-@property (retain) NSString * name;
+@property (readwrite, retain) NSString * name;
 @property int  wave_type;
 @property float sound_vol;
 @property float base_freq;

@@ -176,7 +176,7 @@
 {
 	if ([rememberSegmentedControl selectedSegment] == 0) {
 		if (self.soundEffect) {
-			[rememberedController addObject:self.soundEffect];
+			[rememberedController addObject:[[self.soundEffect copy] autorelease]];
 		}
 	} else {
 		[rememberedController remove:nil];
