@@ -5,3 +5,7 @@
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
 #endif
+
+
+#define rnd(n) (rand()%(n+1))
+#define frnd(range) ((float)rnd(10000)/10000*range)

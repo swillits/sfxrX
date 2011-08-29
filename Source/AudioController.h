@@ -8,27 +8,25 @@
 
 #import <Cocoa/Cocoa.h>
 #import "portaudio.h"
+@class SFXEffect;
+@class SFXSynthesizer;
+@class SFXSampleBuffer;
 
 
-@class SoundEffect;
 @interface AudioController : NSObject {
 	PaStream * stream;
-	BOOL mute_stream;
-	BOOL playing_sample;
+	BOOL mMute;
 	
-	SoundEffect * effect;
+	SFXSynthesizer * mSynthesizer;
+	
+	SFXSampleBuffer * mSampleBuffer;
+	NSUInteger mNumSamplesPlayed;
 }
 
+@property (readwrite) BOOL mute;
+
 + (AudioController *)sharedInstance;
-- (BOOL)writeSoundEffect:(SoundEffect *)aSoundEffect toFile:(NSString *)path ofType:(NSString *)fileType error:(NSError **)error;
-- (void)playSoundEffect:(SoundEffect *)aSoundEffect;
+- (void)playSFXEffect:(SFXEffect *)aSFXEffect;
 - (void)stop;
-
-
-// Private
-- (void)audioCallbackOutputBuffer:(void *)outputBuffer frameCount:(unsigned long)frameCount;
-- (void)resetSample:(BOOL)restart;
-- (void)synthSample:(unsigned long)length outputBuffer:(float *)buffer file:(FILE *)file;
-- (void)writeSample:(float)sample toFile:(FILE *)file;
 
 @end

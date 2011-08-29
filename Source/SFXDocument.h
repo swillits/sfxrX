@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@class SoundEffect;
+@class SFXEffect;
 @class WaveformView;
 
 
@@ -21,12 +21,12 @@
 	IBOutlet WaveformView * waveformView;
 	
 	NSMutableArray * rememberedSoundEffects;
-	SoundEffect * mSoundEffect;
+	SFXEffect * mSFXEffect;
 	
 	float volume;
 }
 
-@property (readwrite, retain) SoundEffect * soundEffect;
+@property (readwrite, retain) SFXEffect * soundEffect;
 @property (readwrite) float volume;
 
 

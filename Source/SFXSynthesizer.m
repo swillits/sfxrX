@@ -1,14 +1,14 @@
 //
-//  Synthesizer.m
+//  SFXSynthesizer.m
 //  sfxrX
 //
 //  Created by Seth Willits on 8/28/11.
 //  Copyright 2011 Araelium Group. All rights reserved.
 //
 
-#import "Synthesizer.h"
-#import "SoundEffect.h"
-#import "misc.h"
+#import "SFXSynthesizer.h"
+#import "SFXEffect.h"
+#import "SFXSampleBuffer.h"
 
 
 
@@ -55,18 +55,18 @@ static double arp_mod;
 
 
 
-@interface Synthesizer ()
+@interface SFXSynthesizer ()
 - (void)resetSample:(BOOL)restart;
 - (void)synthSample:(unsigned long)length outputBuffer:(float *)buffer;
 @end
 
 
 
-@implementation Synthesizer
+@implementation SFXSynthesizer
 @synthesize volume = masterVolume;
 
 
-+ (Synthesizer *)synthesizer;
++ (SFXSynthesizer *)synthesizer;
 {
 	return [[[[self class] alloc] init] autorelease];
 }
@@ -77,11 +77,16 @@ static double arp_mod;
 {
 	self = [super init];
 	
-	
-	masterVolume = 1.0;
-	
+	masterVolume = 0.05;//1.0;
 	
 	return self;
+}
+
+
+
+- (NSUInteger)sampleRate
+{
+	return 44100;
 }
 
 
@@ -331,10 +336,12 @@ static double arp_mod;
 
 
 
-- (NSData *)synthesizeEffect:(SoundEffect *)effect;
+- (SFXSampleBuffer *)synthesizeEffect:(SFXEffect *)effect;
 {
-	unsigned long numSamples = 256;
-	size_t bufferSize = sizeof(float) * numSamples;
+	unsigned long samplesPerIteration = 512;
+	unsigned long offset = 0;
+	
+	size_t bufferSize = sizeof(float) * samplesPerIteration;
 	float * buffer = calloc(bufferSize, 1);
 	
 	
@@ -344,14 +351,20 @@ static double arp_mod;
 		
 		playing_sample = YES;
 		while (playing_sample) {
-			[self synthSample:numSamples outputBuffer:buffer];
+			[self synthSample:samplesPerIteration outputBuffer:buffer + offset];
+	
+			offset += samplesPerIteration;
+			if (playing_sample) {
+				bufferSize += samplesPerIteration * sizeof(float);
+				buffer = realloc(buffer, bufferSize);
+				memset(buffer + offset, 0, samplesPerIteration * sizeof(float));
+			}
 		}
 
 	mEffect = nil;
 	
 	
-	
-	return [NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:YES];
+	return [SFXSampleBuffer sampleBufferWithBuffer:buffer numberOfSamples:(bufferSize / sizeof(float))];
 }
 
 @end

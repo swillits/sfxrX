@@ -8,7 +8,7 @@
 
 #import "SFXDocument.h"
 #import "AudioController.h"
-#import "SoundEffect.h"
+#import "SFXEffect.h"
 #import "WaveformView.h"
 
 
@@ -25,18 +25,25 @@
 {
 	rememberedSoundEffects = [[NSMutableArray alloc] init];
 	[[rememberSegmentedControl cell] setEnabled:NO forSegment:1];
-	self.volume = 10.0;
 	
 	[rememberedSoundsTable setTarget:self];
 	[rememberedSoundsTable setDoubleAction:@selector(editTemporarySound:)];
-	
 	
 	[playButton setKeyEquivalent:@" "];
 	
 	[docWindow center];
 	[docWindow makeKeyAndOrderFront:nil];
 	
-	[self setSoundEffect:[SoundEffect soundEffect]];
+	
+	self.volume = 10.0;
+	self.soundEffect = [SFXEffect soundEffect];
+}
+
+
+- (void)dealloc;
+{
+	[rememberedSoundEffects release];
+	[super dealloc];
 }
 
 
@@ -54,11 +61,11 @@
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-	SoundEffect * effect = nil;
+	SFXEffect * effect = nil;
 	
 	
 	@try {
-		effect = [[[SoundEffect alloc] initWithData:data] autorelease];
+		effect = [[[SFXEffect alloc] initWithData:data] autorelease];
 	}
 	@catch (NSException * e) {
 		*outError = nil;
@@ -77,25 +84,25 @@
 
 @synthesize volume;
 
-- (SoundEffect *)soundEffect;
+- (SFXEffect *)soundEffect;
 {
-	return mSoundEffect;
+	return mSFXEffect;
 }
 
 
-- (void)setSoundEffect:(SoundEffect *)effect;
+- (void)setSoundEffect:(SFXEffect *)effect;
 {
-	if (effect == mSoundEffect) {
+	if (effect == mSFXEffect) {
 		return;
 	}
 	
 	
-	if (mSoundEffect) {
-		[[self undoManager] registerUndoWithTarget:self selector:@selector(setSoundEffect:) object:mSoundEffect];
+	if (mSFXEffect) {
+		[[self undoManager] registerUndoWithTarget:self selector:@selector(setSoundEffect:) object:mSFXEffect];
 	}
 	
-	[mSoundEffect autorelease];
-	mSoundEffect = [effect retain];
+	[mSFXEffect autorelease];
+	mSFXEffect = [effect retain];
 	
 	
 	[waveformView setEffect:effect];
@@ -111,13 +118,13 @@
 
 - (IBAction)preset:(id)sender;
 {
-	[self setSoundEffect:[SoundEffect soundEffectFromPreset:[sender tag]]];
+	[self setSoundEffect:[SFXEffect soundEffectFromPreset:[sender tag]]];
 }
 
 
 - (IBAction)randomize:(id)sender;
 {
-	SoundEffect * effect = [[self.soundEffect copy] autorelease];
+	SFXEffect * effect = [[self.soundEffect copy] autorelease];
 	[effect randomize];
 	[self setSoundEffect:effect];
 }
@@ -140,8 +147,8 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 {
-	SoundEffect * effect = (SoundEffect *)[[rememberedController selectedObjects] lastObject];
-	if (effect) [[AudioController sharedInstance] playSoundEffect:effect];
+	SFXEffect * effect = (SFXEffect *)[[rememberedController selectedObjects] lastObject];
+	if (effect) [[AudioController sharedInstance] playSFXEffect:effect];
 	[[rememberSegmentedControl cell] setEnabled:(effect != nil) forSegment:1];
 }
 
@@ -173,7 +180,7 @@
 
 - (IBAction)play:(id)sender;
 {
-	[[AudioController sharedInstance] playSoundEffect:self.soundEffect];
+	[[AudioController sharedInstance] playSFXEffect:self.soundEffect];
 }
 
 

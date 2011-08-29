@@ -7,14 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@class SoundEffect;
+@class SFXEffect;
+@class SFXSampleBuffer;
 
 
 @interface WaveformView : NSView {
-	SoundEffect * mEffect;
-	NSData * mData;
+	SFXEffect * mEffect;
+	SFXSampleBuffer * mSampleBuffer;
 }
 
-@property (readwrite, retain) SoundEffect * effect;
+@property (readwrite, retain) SFXEffect * effect;
 
 @end

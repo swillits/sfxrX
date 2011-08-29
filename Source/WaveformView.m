@@ -7,8 +7,9 @@
 //
 
 #import "WaveformView.h"
-#import "Synthesizer.h"
-#import "SoundEffect.h"
+#import "SFXSynthesizer.h"
+#import "SFXEffect.h"
+#import "SFXSampleBuffer.h"
 
 
 
@@ -24,14 +25,14 @@
 - (void)dealloc
 {
 	[self setEffect:nil];
-	[mData release];
+	[mSampleBuffer release];
 	[super dealloc];
 }
 
 
-- (void)setEffect:(SoundEffect *)effect
+- (void)setEffect:(SFXEffect *)effect
 {
-	NSSet * keyPaths = [SoundEffect keyPathsForWaveform];
+	NSSet * keyPaths = [SFXEffect keyPathsForWaveform];
 	
 	
 	for (NSString * keyPath in keyPaths) {
@@ -51,7 +52,7 @@
 }
 
 
-- (SoundEffect *)effect
+- (SFXEffect *)effect
 {
 	return mEffect;
 }
@@ -68,21 +69,16 @@
 
 
 
-- (BOOL)acceptsFirstResponder
-{
-	return YES;
-}
-
-
 - (void)drawRect:(NSRect)rect
 {
 	[[NSColor whiteColor] set];
 	NSRectFill(rect);
 	
 	
-	if (!mData) mData = [[[Synthesizer synthesizer] synthesizeEffect:mEffect] retain];
-	unsigned long numSamples = ([mData length] / sizeof(float));
-	const float * buffer = (const float *)[mData bytes];
+	SFXSynthesizer * synth = [SFXSynthesizer synthesizer];
+	if (!mSampleBuffer) mSampleBuffer = [[synth synthesizeEffect:mEffect] retain];
+	unsigned long numSamples = mSampleBuffer.numberOfSamples;
+	const float * buffer = mSampleBuffer.buffer;
 	float maxValue = 0.0;
 	
 	for (int i = 0; i < numSamples; i++) {
@@ -92,7 +88,7 @@
 	
 	
 	CGFloat xscale = (self.bounds.size.width / (float)(numSamples));
-	CGFloat yscale = (self.bounds.size.height * 0.90) * 0.5 / maxValue;
+	CGFloat yscale = (self.bounds.size.height - 40.0) * 0.5 / maxValue;
 	CGFloat xoff = 0.0;
 	CGFloat yoff = (self.bounds.size.height / 2.0);
 	
@@ -108,6 +104,23 @@
 	[[NSColor greenColor] set];
 	[path setLineWidth:1.0];
 	[path stroke];
+	
+	
+	
+	
+	NSDictionary * attribs = [NSDictionary dictionaryWithObjectsAndKeys:
+									[NSFont systemFontOfSize:11.0], NSFontAttributeName,
+									[NSColor grayColor], NSForegroundColorAttributeName, nil];
+	NSAttributedString * attrStr = nil;
+	
+	
+//	attrStr = [[[NSAttributedString alloc] initWithString:@"0.0" attributes:attribs] autorelease];
+//	[attrStr drawAtPoint:NSMakePoint(4.0, 2.0)];
+	
+	
+	float duration = (float)numSamples / (float)[synth sampleRate];
+	attrStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.2f sec", duration] attributes:attribs] autorelease];
+	[attrStr drawAtPoint:NSMakePoint(self.bounds.size.width - 4.0 - [attrStr size].width, 2.0)];
 }
 
 
@@ -122,8 +135,8 @@
 
 - (void)updateWaveform
 {
-	[mData release];
-	mData = nil;
+	[mSampleBuffer release];
+	mSampleBuffer = nil;
 	
 	[self setNeedsDisplay:YES];
 }

@@ -1,15 +1,15 @@
 //
-//  SoundEffect.m
+//  SFXEffect.m
 //  sfxrX
 //
 //  Created by Seth Willits on 4/23/08.
 //  Copyright 2008 Araelium Group. All rights reserved.
 //
 
-#import "SoundEffect.h"
-#import "AudioController.h"
-#import "endian.h"
-#import "misc.h"
+#import "SFXEffect.h"
+#import "SFXSynthesizer.h"
+#import "SFXSampleBuffer.h"
+#import "AGBinaryStream.h"
 
 
 
@@ -17,7 +17,7 @@ NSString * SfxFileTypeWav = @"WAV";
 NSString * SfxFileTypeDocument = @"sfs";
 
 
-@implementation SoundEffect
+@implementation SFXEffect
 
 @synthesize name			= mName;
 @synthesize wave_type		= mWave_type;
@@ -63,88 +63,90 @@ NSString * SfxFileTypeDocument = @"sfs";
 }
 
 
+
 + (id)soundEffectFromPreset:(int)preset;
 {
-	SoundEffect * effect = [[[[self class] alloc] init] autorelease];
+	SFXEffect * effect = [[[[self class] alloc] init] autorelease];
 	[effect resetFromPreset:preset];
 	return effect;
 }
 
 
-+ (id)soundEffectWithURL:(NSURL *)url;
-{
-	return [[[[self class] alloc] initWithURL:url] autorelease];
-}
 
-
-- (id)initWithURL:(NSURL *)url;
+- (id)initWithData:(NSData *)data
 {
 	if (!(self = [self init])) return nil;
 	
 	
-	FILE * file = fopen([[url relativePath] fileSystemRepresentation], "rb");
-	if(!file)
+	AGBinaryStream * bs = [[AGBinaryStream alloc] initWithData:data options:(AGBSOptionsRead | AGBSOptionsLittleEndian) error:nil];
+	if (!bs) {
+		[self release];
 		return nil;
+	}
 	
-	int junk;
-	int version=0;
-	le_read(&version, 1, sizeof(int), file);
+	
+	int version = 0;
+	version = [bs readInt32];
 	if (version!=100 && version!=101 && version!=102)
 		return nil;
-
-	le_read(&mWave_type, 1, sizeof(int), file);
-
-	mSound_vol=0.5f;
-	if (version==102) {
-        le_readf(&mSound_vol, 1, sizeof(float), file);
+	
+	mWave_type = [bs readInt32];
+	
+	
+	mSound_vol = 0.5f;
+	if (version == 102) {
+        mSound_vol = [bs readFloat];
     }
-	mSound_vol=1.5f;	
+	mSound_vol = 1.5f;
     
 
-	le_readf(&mBase_freq, 1, sizeof(float), file);
-	le_readf(&mFreq_limit, 1, sizeof(float), file);
-	le_readf(&mFreq_ramp, 1, sizeof(float), file);
-	if(version>=101) {
-        le_readf(&mFreq_dramp, 1, sizeof(float), file);
+	
+	mBase_freq		= [bs readFloat];
+	mFreq_limit		= [bs readFloat];
+	mFreq_ramp		= [bs readFloat];
+	
+	if (version >= 101) {
+        mFreq_dramp = [bs readFloat];
     }
-		
-	le_readf(&mDuty, 1, sizeof(float), file);
-	le_readf(&mDuty_ramp, 1, sizeof(float), file);
-
-	le_readf(&mVib_strength, 1, sizeof(float), file);
-	le_readf(&mVib_speed, 1, sizeof(float), file);
-	le_readf(&mVib_delay, 1, sizeof(float), file);
-
-	le_readf(&mEnv_attack, 1, sizeof(float), file);
-	le_readf(&mEnv_sustain, 1, sizeof(float), file);
-	le_readf(&mEnv_decay, 1, sizeof(float), file);
-	le_readf(&mEnv_punch, 1, sizeof(float), file);
-
-    /* 'sizeof(bool)' can't work in the next line; I have to hardcode it to 8 bits. A boolean is 8 bits on i386 and 32 bits on PPC, it seems. -Volt */
-	le_read(&junk, 1, 3, file); 
-	le_read(&mFilter_on, 1, 1, file);
 	
-	le_readf(&mLpf_resonance, 1, sizeof(float), file);
-	le_readf(&mLpf_freq, 1, sizeof(float), file);
-	le_readf(&mLpf_ramp, 1, sizeof(float), file);
-	le_readf(&mHpf_freq, 1, sizeof(float), file);
-	le_readf(&mHpf_ramp, 1, sizeof(float), file);
+	mDuty			= [bs readFloat];
+	mDuty_ramp		= [bs readFloat];
+
+	mVib_strength	= [bs readFloat];
+	mVib_speed		= [bs readFloat];
+	mVib_delay		= [bs readFloat];
+
+	mEnv_attack		= [bs readFloat];
+	mEnv_sustain	= [bs readFloat];
+	mEnv_decay		= [bs readFloat];
+	mEnv_punch		= [bs readFloat];
 	
-	le_readf(&mPha_offset, 1, sizeof(float), file);
-	le_readf(&mPha_ramp, 1, sizeof(float), file);
+	[bs readUInt8]; // Unused bytes
+	[bs readUInt8];
+	[bs readUInt8];
+	
+	mFilter_on		= [bs readBool];
+	mLpf_resonance	= [bs readFloat];
+	mLpf_freq		= [bs readFloat];
+	mLpf_ramp		= [bs readFloat];
+	mHpf_freq		= [bs readFloat];
+	mHpf_ramp		= [bs readFloat];
+	
+	mPha_offset		= [bs readFloat];
+	mPha_ramp		= [bs readFloat];
 
-	le_readf(&mRepeat_speed, 1, sizeof(float), file);
-
-	if(version>=101)
-	{
-		le_readf(&mArp_speed, 1, sizeof(float), file);
-		le_readf(&mArp_mod, 1, sizeof(float), file);
+	mRepeat_speed	= [bs readFloat];
+	
+	if (version >= 101) {
+		mArp_speed = [bs readFloat];
+		mArp_mod = [bs readFloat];
 	}
-
-	fclose(file);
+	
 	
 	return self;
 }
+
+
 
 
 - (id)init;
@@ -156,10 +158,17 @@ NSString * SfxFileTypeDocument = @"sfs";
 }
 
 
+
 - (id)copyWithZone:(NSZone *)zone;
 {
-	return NSCopyObject(self, 0, zone);
+	SFXEffect * effect = NSCopyObject(self, 0, zone);
+	
+	// Make sure to properly copy any pointers
+	effect->mName = [mName copy];
+	
+	return effect;
 }
+
 
 
 - (void)dealloc;
@@ -170,70 +179,135 @@ NSString * SfxFileTypeDocument = @"sfs";
 
 
 
-- (BOOL)writeToFile:(NSString *)path ofType:(NSString *)fileType error:(NSError **)error;
+
+- (NSData *)dataOfType:(NSString *)type;
 {
-	// ------- Wav -----------
-	if ([fileType isEqualToString:SfxFileTypeWav]) {
-		return [[AudioController sharedInstance] writeSoundEffect:self toFile:path ofType:fileType error:error];
+	// ----------------------------------------------------
+	//   WAV File
+	// ----------------------------------------------------
+	if ([type isEqualToString:SfxFileTypeWav]) {
+		AGBinaryStream * bs = [[[AGBinaryStream alloc] initWithData:nil options:(AGBSOptionsWrite | AGBSOptionsLittleEndian) error:nil] autorelease];
+		SFXSampleBuffer * sampleBuffer = [[SFXSynthesizer synthesizer] synthesizeEffect:self];
+		const int wav_bits = 16;
+		const int wav_freq = 44100;
+		uint32_t bytesPerSec = (wav_freq * wav_bits / 8);
+		uint16_t blockAlignment = (wav_bits / 8);
+		off_t dataChunkSizePosition = 0;
+		
+		// RIFF chunk
+		[bs writeData:"RIFF" length:4];         // RIFF
+		[bs writeUInt32:0];                     // remaining file size (total minus 8 bytes)
+		[bs writeData:"WAVE" length:4];         // "WAVE"
+		
+		// fmt chunk
+		[bs writeData:"fmt " length:4];         // "fmt "
+		[bs writeUInt32:16];                    // chunk size
+		[bs writeUInt16:1];                     // compression code
+		[bs writeUInt16:1];                     // channels
+		[bs writeUInt32:wav_freq];              // sample rate
+		[bs writeUInt32:bytesPerSec];           // bytes/sec
+		[bs writeUInt16:blockAlignment];        // block align
+		[bs writeUInt16:wav_bits];              // bits per sample
+		
+		// data chunk
+		[bs writeData:"data" length:4];         // "data"
+		[bs writeUInt32:0];                     // chunk size
+		
+		dataChunkSizePosition = ([bs position] - 4);
+		
+		int file_sampleswritten = 0;
+		float filesample = 0.0f;
+		int fileacc = 0;
+		NSUInteger numberOfSamples = sampleBuffer.numberOfSamples;
+		for (int i = 0; i < numberOfSamples; i++) {
+			float sample = sampleBuffer.buffer[i];
+			
+			// quantize depending on format
+			// accumulate/count to accomodate variable sample rate?
+			sample *= 4.0f; // arbitrary gain to get reasonable output volume...
+			if (sample >  1.0f) sample =  1.0f;
+			if (sample < -1.0f) sample = -1.0f;
+			
+			filesample += sample;
+			fileacc++;
+			
+			if (wav_freq == 44100 || fileacc == 2) {
+				filesample/=fileacc;
+				fileacc = 0;
+				
+				if (wav_bits == 16) {
+					short isample = (uint16_t)(filesample * 32000);
+					[bs writeUInt16:isample];
+				} else {
+					uint8_t isample = (uint8_t)(filesample * 127 + 128);
+					[bs writeUInt8:isample];
+				}
+				
+				filesample = 0.0f;
+			}
+			
+			file_sampleswritten++;
+		}
+		
+		// Go back and write the data chunk size
+		[bs setPosition:dataChunkSizePosition];
+		[bs writeUInt32:(file_sampleswritten * wav_bits / 8)];
+		
+		// Go back and write RIFF chunk size
+		[bs setPosition:4];
+		[bs writeUInt32:[bs length] - 8];
+		
+		return [bs data];
 	}
 	
 	
+	// ----------------------------------------------------
+	//   sfxr sound effect document
+	// ----------------------------------------------------
+	if ([type isEqualToString:SfxFileTypeDocument]) {
+		
+		
+		AGBinaryStream * bs = [[[AGBinaryStream alloc] initWithData:nil options:(AGBSOptionsWrite | AGBSOptionsLittleEndian) error:nil] autorelease];
+		int version = 102;
+		
+		[bs writeUInt32:version];
+		[bs writeUInt32:mWave_type];
+		[bs writeFloat:mSound_vol];
+		[bs writeFloat:mBase_freq];
+		[bs writeFloat:mFreq_limit];
+		[bs writeFloat:mFreq_ramp];
+		[bs writeFloat:mFreq_dramp];
+		[bs writeFloat:mDuty];
+		[bs writeFloat:mDuty_ramp];
+		[bs writeFloat:mVib_strength];
+		[bs writeFloat:mVib_speed];
+		[bs writeFloat:mVib_delay];
+		[bs writeFloat:mEnv_attack];
+		[bs writeFloat:mEnv_sustain];
+		[bs writeFloat:mEnv_decay];
+		[bs writeFloat:mEnv_punch];
+		
+		[bs writeUInt8:0]; // Unused bytes
+		[bs writeUInt8:0];
+		[bs writeUInt8:0];
+		
+		[bs writeBool:mFilter_on];
+		[bs writeFloat:mLpf_resonance];
+		[bs writeFloat:mLpf_freq];
+		[bs writeFloat:mLpf_ramp];
+		[bs writeFloat:mHpf_freq];
+		[bs writeFloat:mHpf_ramp];
+		[bs writeFloat:mPha_offset];
+		[bs writeFloat:mPha_ramp];
+		[bs writeFloat:mRepeat_speed];
+		[bs writeFloat:mArp_speed];
+		[bs writeFloat:mArp_mod];
+		
+		return [bs data];
+	}
 	
-	// ------- Write it as a sfxr sound effect document ----------
 	
-	FILE * file = fopen([[path stringByExpandingTildeInPath] fileSystemRepresentation], "wb");
-	if (!file)
-		return NO;
-
-	unsigned int zero = 0;
-	int version=102;
-	
-	le_write(&version, 1, sizeof(int), file);
-	le_write(&mWave_type, 1, sizeof(int), file);
-	le_writef(&mSound_vol, 1, sizeof(float), file);
-	le_writef(&mBase_freq, 1, sizeof(float), file);
-	le_writef(&mFreq_limit, 1, sizeof(float), file);
-	
-	le_writef(&mFreq_ramp, 1, sizeof(float), file);
-	le_writef(&mFreq_dramp, 1, sizeof(float), file);
-	le_writef(&mDuty, 1, sizeof(float), file);
-	le_writef(&mDuty_ramp, 1, sizeof(float), file);
-	le_writef(&mVib_strength, 1, sizeof(float), file);
-	
-	le_writef(&mVib_speed, 1, sizeof(float), file);
-	le_writef(&mVib_delay, 1, sizeof(float), file);
-	le_writef(&mEnv_attack, 1, sizeof(float), file);
-	le_writef(&mEnv_sustain, 1, sizeof(float), file);
-	le_writef(&mEnv_decay, 1, sizeof(float), file);
-	
-	le_writef(&mEnv_punch, 1, sizeof(float), file);
-	
-	le_write(&zero, 1, 3, file);
-	le_write(&mFilter_on, 1, 1, file);
-	
-	le_writef(&mLpf_resonance, 1, sizeof(float), file);
-	le_writef(&mLpf_freq, 1, sizeof(float), file);
-	le_writef(&mLpf_ramp, 1, sizeof(float), file);
-	le_writef(&mHpf_freq, 1, sizeof(float), file);
-	le_writef(&mHpf_ramp, 1, sizeof(float), file);
-	
-	le_writef(&mPha_offset, 1, sizeof(float), file);
-	le_writef(&mPha_ramp, 1, sizeof(float), file);
-
-	le_writef(&mRepeat_speed, 1, sizeof(float), file);
-
-	le_writef(&mArp_speed, 1, sizeof(float), file);
-	le_writef(&mArp_mod, 1, sizeof(float), file);
-
-	fclose(file);
-	
-	return YES;
-}
-
-
-- (void)play;
-{
-	[[AudioController sharedInstance] playSoundEffect:self];
+	return nil;
 }
 
 
@@ -272,6 +346,8 @@ NSString * SfxFileTypeDocument = @"sfs";
 	self.arp_speed		= 0.0f;
 	self.arp_mod		= 0.0f;
 }
+
+
 
 
 - (void)resetFromPreset:(int)preset
@@ -454,6 +530,7 @@ NSString * SfxFileTypeDocument = @"sfs";
 }
 
 
+
 - (void)mutate;
 {
 	if(rnd(1)) self.base_freq+=frnd(0.1f)-0.05f;
@@ -480,6 +557,7 @@ NSString * SfxFileTypeDocument = @"sfs";
 	if(rnd(1)) self.arp_speed+=frnd(0.1f)-0.05f;
 	if(rnd(1)) self.arp_mod+=frnd(0.1f)-0.05f;
 }
+
 
 
 - (void)randomize;

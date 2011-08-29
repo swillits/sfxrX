@@ -1,5 +1,5 @@
 //
-//  SoundEffect.h
+//  SFXEffect.h
 //  sfxrX
 //
 //  Created by Seth Willits on 4/23/08.
@@ -35,7 +35,7 @@ enum {
 };
 
 
-@interface SoundEffect : NSObject {
+@interface SFXEffect : NSObject {
 	NSString * mName;
 	
 	int   mWave_type;
@@ -71,11 +71,9 @@ enum {
 
 + (id)soundEffect;
 + (id)soundEffectFromPreset:(int)preset;
-+ (id)soundEffectWithURL:(NSURL *)url;
-- (id)initWithURL:(NSURL *)url;
-- (BOOL)writeToFile:(NSString *)path ofType:(NSString *)fileType error:(NSError **)error;
+- (id)initWithData:(NSData *)data;
+- (NSData *)dataOfType:(NSString *)type;
 
-- (void)play;
 
 - (void)randomize;
 - (void)mutate;
