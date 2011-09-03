@@ -54,14 +54,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 5D9AE6DA13C54A1100484A7F /* Sparkle.framework */;
+			remoteGlobalIDString = 5D9AE6DA13C54A1100484A7F;
 			remoteInfo = Sparkle;
 		};
 		5D5C33F3140B301600093C14 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DAFC6D60DC438D2002BC0DB /* Sparkle.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 5D9AE79C13C54BA100484A7F /* relaunch */;
+			remoteGlobalIDString = 5D9AE79C13C54BA100484A7F;
 			remoteInfo = relaunch;
 		};
 /* End PBXContainerItemProxy section */
