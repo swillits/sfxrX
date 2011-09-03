@@ -50,7 +50,7 @@ NSString * SfxFileTypeDocument = @"sfs";
 
 + (NSSet *)keyPathsForWaveform;
 {
-	return [NSSet setWithObjects:@"wave_type", @"sound_vol", @"base_freq", @"freq_limit", @"freq_ramp", @"freq_dramp", @"duty", @"duty_ramp",
+	return [NSSet setWithObjects:@"wave_type", @"base_freq", @"freq_limit", @"freq_ramp", @"freq_dramp", @"duty", @"duty_ramp",
 				@"vib_strength", @"vib_speed", @"vib_delay", @"env_attack", @"env_sustain", @"env_decay", @"env_punch", @"filter_on",
 				@"lpf_resonance", @"lpf_freq", @"lpf_ramp", @"hpf_freq", @"hpf_ramp", @"pha_offset", @"pha_ramp", @"repeat_speed", @"arp_speed", @"arp_mod", nil];
 }
@@ -97,7 +97,6 @@ NSString * SfxFileTypeDocument = @"sfs";
 	if (version == 102) {
         mSound_vol = [bs readFloat];
     }
-	mSound_vol = 1.5f;
     
 
 	
@@ -222,11 +221,11 @@ NSString * SfxFileTypeDocument = @"sfs";
 		for (int i = 0; i < numberOfSamples; i++) {
 			float sample = sampleBuffer.buffer[i];
 			
+			// Volume
+			sample *= self.sound_vol;
+			
 			// quantize depending on format
 			// accumulate/count to accomodate variable sample rate?
-			sample *= 4.0f; // arbitrary gain to get reasonable output volume...
-			if (sample >  1.0f) sample =  1.0f;
-			if (sample < -1.0f) sample = -1.0f;
 			
 			filesample += sample;
 			fileacc++;
@@ -320,7 +319,7 @@ NSString * SfxFileTypeDocument = @"sfs";
 - (void)reset;
 {
 	self.wave_type		= 0;
-	self.sound_vol		= 1.5;
+	self.sound_vol		= 0.5;
 	self.base_freq		= 0.3f;
 	self.freq_limit		= 0.0f;
 	self.freq_ramp		= 0.0f;

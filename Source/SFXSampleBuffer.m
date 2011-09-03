@@ -44,4 +44,19 @@
 }
 
 
+
+- (void)normalize
+{
+	float maxValue = 0.0;
+	
+	for (NSUInteger i = 0; i < mNumberOfSamples; i++) {
+		maxValue = MAX(maxValue, fabs(mBuffer[i]));
+	}
+	
+	for (NSUInteger i = 0; i < mNumberOfSamples; i++) {
+		mBuffer[i] = mBuffer[i] / maxValue;
+	}
+}
+
+
 @end

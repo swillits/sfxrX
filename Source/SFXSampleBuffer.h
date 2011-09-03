@@ -18,5 +18,6 @@
 @property (readwrite) NSUInteger numberOfSamples;
 
 + (SFXSampleBuffer *)sampleBufferWithBuffer:(float *)buffer numberOfSamples:(NSUInteger)count;
+- (void)normalize;
 
 @end

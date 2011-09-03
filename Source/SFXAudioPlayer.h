@@ -16,14 +16,16 @@
 @interface SFXAudioPlayer : NSObject {
 	PaStream * stream;
 	BOOL mMuted;
+	float mVolume;
 	
 	SFXSynthesizer * mSynthesizer;
-	
 	SFXSampleBuffer * mSampleBuffer;
+	float mEffectVolume;
 	NSUInteger mNumSamplesPlayed;
 }
 
 @property (readwrite) BOOL muted;
+@property (readwrite) float volume;
 
 + (SFXAudioPlayer *)sharedInstance;
 - (void)playSoundEffect:(SFXEffect *)effect;

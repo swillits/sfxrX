@@ -29,6 +29,7 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 
 @implementation SFXAudioPlayer
 @synthesize muted = mMuted;
+@synthesize volume = mVolume;
 
 
 + (SFXAudioPlayer *)sharedInstance;
@@ -63,7 +64,7 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 	
 	
 	mSynthesizer = [[SFXSynthesizer synthesizer] retain];
-	
+	mVolume = 1.0;
 	
 	return self;
 }
@@ -85,6 +86,7 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 	@synchronized(self) {
 		[mSampleBuffer release];
 		mSampleBuffer = [[mSynthesizer synthesizeEffect:effect] retain];
+		mEffectVolume = [effect sound_vol];
 		mNumSamplesPlayed = 0;
 	}
 }
@@ -112,10 +114,9 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
     void * userData )
 {
 	float * fout = (float *)outputBuffer;
-	int i = 0;
 	
 	// Mute for safety
-	for (i = 0; i < frameCount; i++) {
+	for (int i = 0; i < frameCount; i++) {
 		*fout++ = 0.0f;
 	}
 	
@@ -139,6 +140,15 @@ int AudioCallback(const void *inputBuffer, void *outputBuffer,
 			
 			// Any remaining unset samples in the output buffer are already zeroed
 			// - See AudioCallback()
+			
+			// Scale to volume
+			for (int i = 0; i < frameCount; i++) {
+				if (mMuted) {
+					((float *)outputBuffer)[i] = 0.0f;
+				} else {
+					((float *)outputBuffer)[i] *= mVolume * mEffectVolume;
+				}
+			}
 			
 			// Stop if the sound is done
 			mNumSamplesPlayed += numFramesToCopy;

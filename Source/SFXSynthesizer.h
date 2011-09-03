@@ -13,12 +13,9 @@
 
 @interface SFXSynthesizer : NSObject {
 	SFXEffect * mEffect;
-	
 	BOOL playing_sample;
-	float masterVolume;
 }
 
-@property (readwrite, assign) float volume;
 @property (readonly) NSUInteger sampleRate;
 
 + (SFXSynthesizer *)synthesizer;

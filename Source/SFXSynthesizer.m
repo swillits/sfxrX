@@ -63,8 +63,6 @@ static double arp_mod;
 
 
 @implementation SFXSynthesizer
-@synthesize volume = masterVolume;
-
 
 + (SFXSynthesizer *)synthesizer;
 {
@@ -76,8 +74,6 @@ static double arp_mod;
 - (id)init;
 {
 	self = [super init];
-	
-	masterVolume = 0.05;//1.0;
 	
 	return self;
 }
@@ -162,9 +158,10 @@ static double arp_mod;
 
 - (void)synthSample:(unsigned long)length outputBuffer:(float *)buffer;
 {
-	int sampleIndex;
+	float maxSample = 0.0;
+	float minSample = 0.0;
 	
-	for (sampleIndex = 0; sampleIndex < length; sampleIndex++)
+	for (int sampleIndex = 0; sampleIndex < length; sampleIndex++)
 	{
 		// Stop synthesizing the sound
 		if (!playing_sample) {
@@ -317,20 +314,23 @@ static double arp_mod;
 		}
 		
 		
-		ssample = ssample / 8 * masterVolume;
-		ssample *= 2.0f * mEffect.sound_vol;
-	
+		ssample = ssample / 8.0; // Why 8.0??
+		maxSample = MAX(maxSample, ssample);
+		minSample = MIN(minSample, ssample);
+		
 		
 		
 		// --------------------------------------
 		// WRITE SAMPLE TO BUFFER
 		// --------------------------------------
 		if (buffer != NULL) {
-			if (ssample >  1.0f) ssample =  1.0f;
-			if (ssample < -1.0f) ssample = -1.0f;
 			*buffer++ = ssample;
 		}
 	}
+	
+//	if (fabs(maxSample) > 1.1  ||  fabs(minSample) > 1.1) {
+//		NSLog(@"%f - %f", maxSample, minSample);
+//	}
 }
 
 
@@ -364,7 +364,9 @@ static double arp_mod;
 	mEffect = nil;
 	
 	
-	return [SFXSampleBuffer sampleBufferWithBuffer:buffer numberOfSamples:(bufferSize / sizeof(float))];
+	SFXSampleBuffer * sampleBuffer = [SFXSampleBuffer sampleBufferWithBuffer:buffer numberOfSamples:(bufferSize / sizeof(float))];
+	[sampleBuffer normalize];
+	return sampleBuffer;
 }
 
 @end
