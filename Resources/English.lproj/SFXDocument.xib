@@ -2922,7 +2922,7 @@
 					<object class="NSSegmentedControl" id="574581200">
 						<reference key="NSNextResponder" ref="901726464"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 6}, {63, 25}}</string>
+						<string key="NSFrame">{{10, 7}, {63, 24}}</string>
 						<reference key="NSSuperview" ref="901726464"/>
 						<reference key="NSWindow"/>
 						<bool key="NSEnabled">YES</bool>
@@ -2958,7 +2958,7 @@
 							</array>
 							<int key="NSSelectedSegment">1</int>
 							<int key="NSTrackingMode">2</int>
-							<int key="NSSegmentStyle">2</int>
+							<int key="NSSegmentStyle">1</int>
 						</object>
 					</object>
 					<object class="NSScrollView" id="418629698">

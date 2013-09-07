@@ -261,7 +261,7 @@ static double arp_mod;
 				if(fp < square_duty)
 					sample = 0.5f;
 				else
-					sample =- 0.5f;
+					sample = -0.5f;
 				break;
 			case 1: // sawtooth
 				sample=1.0f-fp*2;
