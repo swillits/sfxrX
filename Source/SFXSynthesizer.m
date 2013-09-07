@@ -257,22 +257,22 @@ static double arp_mod;
 			float fp=(float)phase/period;
 			switch(mEffect.wave_type)
 			{
-			case 0: // square
+			case SfxSquarewave:
 				if(fp < square_duty)
 					sample = 0.5f;
 				else
 					sample = -0.5f;
 				break;
-			case 1: // sawtooth
+			case SfxSawtooth:
 				sample=1.0f-fp*2;
 				break;
-			case 2: // sine
+			case SfxSinewave:
 				sample = (float) sin(fp * 2 * M_PI);
 				break;
-			case 3: // noise
+			case SfxNoise:
 				sample = noise_buffer[phase*32/period];
 				break;
-			case 4: // triangle
+			case SfxTriangle:
 				if (fp <= 0.25) {
 					sample = 4.0 * fp;
 				} else if (fp <= 0.5) {
