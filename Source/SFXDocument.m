@@ -193,9 +193,11 @@
 
 - (IBAction)export:(id)sender;
 {
-	NSSavePanel * panel = [NSSavePanel savePanel];
-	[panel beginSheetForDirectory:nil file:[self.soundEffect.name stringByAppendingPathExtension:@"wav"] modalForWindow:docWindow modalDelegate:self
-		didEndSelector:@selector(exportPanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	NSSavePanel *panel = [NSSavePanel savePanel];
+	panel.nameFieldStringValue = [self.soundEffect.name stringByAppendingPathExtension:@"wav"];
+	[panel beginSheetModalForWindow:docWindow completionHandler:^(NSInteger result) {
+		[self exportPanelDidEnd:panel returnCode:result contextInfo:nil];
+	}];
 }
 
 
