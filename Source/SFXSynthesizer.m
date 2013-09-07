@@ -277,7 +277,9 @@ static double arp_mod;
 					sample = 4.0 * fp;
 				} else if (fp <= 0.5) {
 					sample = 1.0 - 4.0 * (fp - 0.25);
-				} else if (fp >= 0.75) {
+				} else if (fp <= 0.75) {
+					sample = -4.0 * (fp - 0.5);
+				} else {
 					sample = 4.0 * (fp - 1.0);
 				}
 				
