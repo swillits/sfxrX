@@ -42,7 +42,7 @@
 	<key>CFBundleVersion</key>
 	<string>88</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.6</string>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
