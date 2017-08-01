@@ -14,7 +14,11 @@
 @interface WaveformView : NSView {
 	SFXEffect * mEffect;
 	SFXSampleBuffer * mSampleBuffer;
+    NSOperationQueue *_waveformImageDrawingQueue;
 }
+    
+@property (nonatomic, strong) NSImage *cachedWaveformImage;
+@property (nonatomic, strong) NSOperationQueue *waveformImageDrawingQueue;
 
 @property (readwrite, retain) SFXEffect * effect;
 
