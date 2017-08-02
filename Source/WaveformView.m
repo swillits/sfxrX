@@ -11,8 +11,7 @@
 #import "SFXEffect.h"
 #import "SFXSampleBuffer.h"
 
-
-
+const NSSize kWaveformImageDefaultSize = {.width = 1024.0, .height = 400.0};
 
 @interface WaveformView (Private)
 - (void)updateWaveform;
@@ -21,6 +20,18 @@
 
 
 @implementation WaveformView
+    
+- (NSOperationQueue *)waveformImageDrawingQueue
+{
+    if (!_waveformImageDrawingQueue)
+    {
+        _waveformImageDrawingQueue = [NSOperationQueue new];
+        _waveformImageDrawingQueue.maxConcurrentOperationCount = 1;
+    }
+    
+    return _waveformImageDrawingQueue;
+}
+
 
 - (void)dealloc
 {
@@ -74,71 +85,78 @@
 	[[NSColor whiteColor] set];
 	NSRectFill(rect);
 	
-	
-	SFXSynthesizer * synth = [SFXSynthesizer synthesizer];
-	if (!mSampleBuffer) mSampleBuffer = [[synth synthesizeEffect:mEffect] retain];
-	unsigned long numSamples = mSampleBuffer.numberOfSamples;
-	const float * buffer = mSampleBuffer.buffer;
-	float maxValue = 0.0;
-	
-	for (int i = 0; i < numSamples; i++) {
-		maxValue = MAX(maxValue, fabs(buffer[i]));
-	}
-	
-	
-	
-	CGFloat xscale = (self.bounds.size.width / (float)(numSamples));
-	CGFloat yscale = (self.bounds.size.height - 40.0) * 0.5 / maxValue;
-	CGFloat xoff = 0.0;
-	CGFloat yoff = (self.bounds.size.height / 2.0);
-	
-	NSBezierPath * path = [NSBezierPath bezierPath];
-	[path moveToPoint:NSMakePoint(xoff, yoff)];
-	
-	for (int i = 0; i < numSamples; i++) {
-		float x = (i * 1.0);
-		float y = buffer[i];
-		[path lineToPoint:NSMakePoint(xoff + x * xscale, yoff + y * yscale)];
-	}
-	
-	[[NSColor greenColor] set];
-	[path setLineWidth:1.0];
-	[path stroke];
-	
-	
-	
-	
-	NSDictionary * attribs = [NSDictionary dictionaryWithObjectsAndKeys:
-									[NSFont systemFontOfSize:11.0], NSFontAttributeName,
-									[NSColor grayColor], NSForegroundColorAttributeName, nil];
-	NSAttributedString * attrStr = nil;
-	
-	
-//	attrStr = [[[NSAttributedString alloc] initWithString:@"0.0" attributes:attribs] autorelease];
-//	[attrStr drawAtPoint:NSMakePoint(4.0, 2.0)];
-	
-	
-	float duration = (float)numSamples / (float)[synth sampleRate];
-	attrStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.2f sec", duration] attributes:attribs] autorelease];
-	[attrStr drawAtPoint:NSMakePoint(self.bounds.size.width - 4.0 - [attrStr size].width, 2.0)];
+	if (self.cachedWaveformImage)
+    {
+        [self.cachedWaveformImage drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    }
 }
-
-
-@end
-
-
-
-
-
-
-@implementation WaveformView (Private)
+    
+- (void)invalidateCachedWaveformImage
+{
+    __block NSImage *waveformImage = nil;
+    
+    [self.waveformImageDrawingQueue cancelAllOperations];
+    
+    [self.waveformImageDrawingQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
+        waveformImage = [[NSImage alloc] initWithSize:kWaveformImageDefaultSize];
+        
+        [waveformImage lockFocus];
+        {
+            SFXSynthesizer * synth = [SFXSynthesizer synthesizer];
+            if (!mSampleBuffer) mSampleBuffer = [[synth synthesizeEffect:mEffect] retain];
+            unsigned long numSamples = mSampleBuffer.numberOfSamples;
+            const float * buffer = mSampleBuffer.buffer;
+            float maxValue = 0.0;
+            
+            for (int i = 0; i < numSamples; i++) {
+                maxValue = MAX(maxValue, fabs(buffer[i]));
+            }
+            
+            CGFloat boundsWidth = kWaveformImageDefaultSize.width;
+            CGFloat boundsHeight = kWaveformImageDefaultSize.height;
+            
+            CGFloat xscale = (boundsWidth / (float)(numSamples));
+            CGFloat yscale = (boundsHeight - 40.0) * 0.5 / maxValue;
+            CGFloat xoff = 0.0;
+            CGFloat yoff = (boundsHeight / 2.0);
+            
+            NSBezierPath * path = [NSBezierPath bezierPath];
+            [path moveToPoint:NSMakePoint(xoff, yoff)];
+            
+            for (int i = 0; i < numSamples; i += 8) {
+                float x = (i * 1.0);
+                float y = buffer[i];
+                [path lineToPoint:NSMakePoint(xoff + x * xscale, yoff + y * yscale)];
+            }
+            
+            [[NSColor greenColor] set];
+            [path setLineWidth:1.0];
+            [path stroke];
+            
+            NSDictionary * attribs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      [NSFont systemFontOfSize:11.0], NSFontAttributeName,
+                                      [NSColor grayColor], NSForegroundColorAttributeName, nil];
+            NSAttributedString * attrStr = nil;
+            
+            float duration = (float)numSamples / (float)[synth sampleRate];
+            attrStr = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.2f sec", duration] attributes:attribs] autorelease];
+            [attrStr drawAtPoint:NSMakePoint(boundsWidth - 4.0 - [attrStr size].width, 2.0)];
+        }
+        [waveformImage unlockFocus];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.cachedWaveformImage = waveformImage;
+            [self setNeedsDisplay:YES];
+        });
+    }]];
+}
 
 - (void)updateWaveform
 {
 	[mSampleBuffer release];
 	mSampleBuffer = nil;
 	
-	[self setNeedsDisplay:YES];
+    [self invalidateCachedWaveformImage];
 }
 
 @end
